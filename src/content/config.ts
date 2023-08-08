@@ -1,39 +1,76 @@
 import { defineCollection, z } from "astro:content";
 
-// Post collection schema
-const postsCollection = defineCollection({
+// Women collection schema
+const womensCollection = defineCollection({
   schema: z.object({
     id: z.string().optional(),
     title: z.string(),
     meta_title: z.string().optional(),
     description: z.string().optional(),
-    date: z.date().optional(),
     image: z.string().optional(),
-    authors: z.array(z.string()).default(["admin"]),
     categories: z.array(z.string()).default(["others"]),
     tags: z.array(z.string()).default(["others"]),
-    draft: z.boolean().optional(),
   }),
 });
 
-// Author collection schema
-const authorsCollection = defineCollection({
+// Mens collection schema
+const mensCollection = defineCollection({
   schema: z.object({
     id: z.string().optional(),
     title: z.string(),
     meta_title: z.string().optional(),
-    image: z.string().optional(),
     description: z.string().optional(),
-    social: z
-      .object({
-        facebook: z.string().optional(),
-        twitter: z.string().optional(),
-        instagram: z.string().optional(),
-      })
-      .optional(),
-    draft: z.boolean().optional(),
+    image: z.string().optional(),
+    categories: z.array(z.string()).default(["others"]),
+    tags: z.array(z.string()).default(["others"]),
   }),
 });
+
+// Nony-binary collection schema
+const nonbinaryCollection = defineCollection({
+  schema: z.object({
+    id: z.string().optional(),
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    categories: z.array(z.string()).default(["others"]),
+    tags: z.array(z.string()).default(["others"]),
+  }),
+});
+
+// Nony-binary collection schema
+const kidsCollection = defineCollection({
+  schema: z.object({
+    id: z.string().optional(),
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    categories: z.array(z.string()).default(["others"]),
+    tags: z.array(z.string()).default(["others"]),
+  }),
+});
+
+
+// // Author collection schema
+// const authorsCollection = defineCollection({
+//   schema: z.object({
+//     id: z.string().optional(),
+//     title: z.string(),
+//     meta_title: z.string().optional(),
+//     image: z.string().optional(),
+//     description: z.string().optional(),
+//     social: z
+//       .object({
+//         facebook: z.string().optional(),
+//         twitter: z.string().optional(),
+//         instagram: z.string().optional(),
+//       })
+//       .optional(),
+//     draft: z.boolean().optional(),
+//   }),
+// });
 
 // Pages collection schema
 const pagesCollection = defineCollection({
@@ -50,7 +87,9 @@ const pagesCollection = defineCollection({
 
 // Export collections
 export const collections = {
-  posts: postsCollection,
-  pages: pagesCollection,
-  authors: authorsCollection,
+  women: womensCollection,
+  men: mensCollection,
+  nonbinary: nonbinaryCollection,
+  kids: kidsCollection,
+  pages: pagesCollection
 };

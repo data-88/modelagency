@@ -1,0 +1,24 @@
+---
+import config from "@config/config.json";
+import Women from "@layouts/Women.astro";
+import Base from "@layouts/Base.astro";
+import Pagination from "@layouts/components/Pagination.astro";
+import { getSinglePage } from "@lib/contentParser.astro";
+import { sortByDate } from "@lib/utils/sortFunctions";
+import { markdownify } from "@lib/utils/textConverter";
+
+const women = await getSinglePage("women");
+const sortedWomen= sortByDate(women);
+const totalPages = Math.ceil(women.length / config.settings.pagination);
+const currentWoman= sortedWomen.slice(0, config.settings.pagination);
+---
+
+<Base title={"Women"}>
+  <section class="section">
+    <div class="container text-center">
+      <h1 set:text={markdownify("women")} class="page-heading h2" />
+      <Women women={currentWoman} />
+      <Pagination section={"women"} currentPage={1} totalPages={totalPages} />
+    </div>
+  </section>
+</Base>

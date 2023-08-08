@@ -5,40 +5,29 @@
       "url": "/"
     },
     {
+      "name": "Women",
+      "url": "/women"
+    },
+    {
+      "name": "Men",
+      "url": "/men"
+    },
+    {
+      "name": "Non-binary",
+      "url": "/non-binary"
+    },
+    {
       "name": "About",
       "url": "/about"
     },
     {
-      "name": "Contact",
-      "url": "/contact"
+      "name": "Get Scouted",
+      "url": "/getscouted"
     },
     {
-      "name": "Pages",
-      "url": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Authors",
-          "url": "/authors"
-        },
-        {
-          "name": "Categories",
-          "url": "/categories"
-        },
-        {
-          "name": "Tags",
-          "url": "/tags"
-        },
-        {
-          "name": "Elements",
-          "url": "/elements"
-        },
-        {
-          "name": "Privacy Policy",
-          "url": "/privacy-policy"
-        }
-      ]
-    }
+      "name": "Contact",
+      "url": "/contact"
+    } 
   ],
   "footer": [
     {

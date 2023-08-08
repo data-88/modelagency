@@ -1,51 +1,37 @@
 ---
 import { Image } from "@astrojs/image/components";
-import Share from "@components/Share.astro";
-import SimilarPosts from "@components/SimilarPosts.astro";
+// import Share from "@components/Share.astro";
 import { getSinglePage } from "@lib/contentParser.astro";
-import dateFormat from "@lib/utils/dateFormat";
-import similerItems from "@lib/utils/similarItems";
-import { humanize,markdownify,slugify } from "@lib/utils/textConverter";
-import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
+import { humanize,markdownify } from "@lib/utils/textConverter";
+import { BiCategoryAlt } from "react-icons/bi/index.js";
 
-const allAuthors = await getSinglePage("authors");
-const posts = await getSinglePage("posts");
-const { post } = Astro.props;
-const similarPosts = similerItems(post, posts, post.slug);
-const { Content } = await post.render();
-const { title, description, authors, categories, image, date, tags } =
-  post.data;
+const women = await getSinglePage("women");
+const { woman } = Astro.props;
+const { Content } = await woman.render();
+const { title, description, woman, categories, image, tags } =
+  woman.data;
 ---
 
 <section class="section">
   <div class="container">
-    <article class="row justify-center">
+    <card class="row justify-center">
       <div class="md:col-10 text-center">
         <h1 set:html={markdownify(title)} class="h2" />
         <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
           <li class="mx-3">
             {
-              allAuthors
-                .filter((author) =>
-                  authors
-                    .map((author: string) => slugify(author))
-                    .includes(slugify(author.data.title))
-                )
-                .map((author, i) => (
-                  <a
-                    href={`/authors/${slugify(author.slug)}`}
-                    class="flex items-center hover:text-primary font-medium"
-                  >
-                    {author.data.image && (
+              allWomen
+                .map((woman, i) => (
+                    {woman.data.image && (
                       <Image
-                        src={author.data.image}
-                        alt={author.data.title}
+                        src={woman.data.image}
+                        alt={woman.data.title}
                         height={50}
                         width={50}
                         class="mr-2 h-6 w-6 rounded-full"
                       />
                     )}
-                    <span>{author.data.title}</span>
+                    <span>{woman.data.title}</span>
                   </a>
                 ))
             }
@@ -61,7 +47,7 @@ const { title, description, authors, categories, image, date, tags } =
                       href={`/categories/${slugify(category)}`}
                       class="mr-2 hover:text-primary font-medium"
                     >
-                      {humanize(category)}{i !== post.data.categories.length - 1 && ","}
+                      {humanize(category)}{i !== woman.data.categories.length - 1 && ","}
                     </a>
                   </li>
                 ))
@@ -103,26 +89,8 @@ const { title, description, authors, categories, image, date, tags } =
               ))
             }
           </ul>
-          <Share
-            className="social-share mb-4"
-            title={title}
-            description={description}
-            slug={post.slug}
-          />
         </div>
       </div>
-    </article>
+    </card>
   </div>
 </section>
-
-<!-- similar posts -->
-{
-  similarPosts.length > 0 && (
-    <section class="section pt-0">
-      <div class="container">
-        <h2 class="mb-8 text-center h3">Similar Posts</h2>
-        <SimilarPosts posts={similarPosts.slice(0, 3)} />
-      </div>
-    </section>
-  )
-}
